@@ -120,18 +120,18 @@ begin
                 inj_next = inj_reg + 1;
             end
             else
-                state_next = test_init;
+                state_next = init;
 
         wr_err:   
         begin
-            state_next = test_init;
+            state_next = init;
             mem = 1'b1;
             rw = 1'b0;
             addr = {10'b0, sw};
             data_f2s = 16'hffff;
         end
 
-        wr_clk1:   // in idle state of sram_ctrl
+        wr_clk1:   
         begin
             state_next = wr_clk2;
             mem = 1'b1;
@@ -147,7 +147,7 @@ begin
         begin
             c_next = c_reg + 1;
             if (c_next == 0)
-                state_next = test_init;
+                state_next = init;
             else
                 state_next = wr_clk1;
         end
@@ -171,7 +171,7 @@ begin
             c_next = c_reg + 1;
 
             if (c_next == 0)
-                state_next = test_init;
+                state_next = init;
             else
                 state_next = rd_clk1;
         end
